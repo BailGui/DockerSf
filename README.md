@@ -26,3 +26,20 @@ Et c'est … fini. Vous avez tout ce qu'il vous faut sur votre ordinateur.
 
 Note: Il s'agit ici de l'installation pour docker compose v1. Pour utiliser docker compose v2, veuillez vous référer à : https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-22-04
 
+## Deuxième étape : Organiser la structure du projet
+
+```
+    - apps/
+       - my-symfony-app/ [← Le dossier contenant votre application Symfony]
+     - bin/
+     - docker/
+     - .env
+     - docker-compose.yaml
+```
+
+Important : Cette structure de dossiers est propre à ce que nous faisons sur nos projets à KNP Labs. Ce n'est basé sur aucune convention et c'est à vous de voir si vous souhaitez la suivre ou non. Il faut juste savoir que les prochaines étapes se baseront sur cette architecture et que vous devrez adapter votre code pour suivre votre propre architecture.
+
+
+
+
+src : https://knplabs.com/fr/blog/comment-dockeriser-un-projet-symfony/
