@@ -140,5 +140,31 @@ services:
 
 ```
 
+## Configurer phpmyadmin 
+
+Dans votre fichier docker-compose, vous pouvez ajouter :
+
+```
+phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: mysql
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "8081:80"
+    networks:
+      - symfony-network
+
+volumes:
+  mysql-data:
+
+networks:
+  symfony-network:
+
+```
+
+
+
 
 src : https://knplabs.com/fr/blog/comment-dockeriser-un-projet-symfony/
