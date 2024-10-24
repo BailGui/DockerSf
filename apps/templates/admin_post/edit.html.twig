@@ -1,0 +1,19 @@
+{% extends 'template.back.html.twig' %}
+
+{% block title %}Edit Post{% endblock %}
+
+{% block CrudPost %}
+<div class="container section-title" data-aos="fade-up">
+  <div class="row justify-content-center">
+     <div class="col-8 align-items-center justify-content-center mt-5">
+    <h1>Edit Post</h1>
+
+    {{ include('admin_post/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_admin_post_index') }}">back to list</a>
+
+    {{ include('admin_post/_delete_form.html.twig') }}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'template.back.html.twig' %}
+
+{% block title %}New Post{% endblock %}
+
+{% block CrudPost %}
+<div class="container section-title" data-aos="fade-up">
+  <div class="row justify-content-center">
+     <div class="col-8 align-items-center justify-content-center mt-5">
+    <h1>Create new Post</h1>
+
+    {{ include('admin_post/_form.html.twig') }}
+
+    <a href="{{ path('app_admin_post_index') }}">back to list</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
