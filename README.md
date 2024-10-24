@@ -39,6 +39,37 @@ Note: Il s'agit ici de l'installation pour docker compose v1. Pour utiliser dock
 
 Important : Cette structure de dossiers est propre à ce que nous faisons sur nos projets à KNP Labs. Ce n'est basé sur aucune convention et c'est à vous de voir si vous souhaitez la suivre ou non. Il faut juste savoir que les prochaines étapes se baseront sur cette architecture et que vous devrez adapter votre code pour suivre votre propre architecture.
 
+## Troisième étape : Le fichier docker-compose
+
+Vous allez avoir besoin d'un fichier listant toutes les images requises pour votre application. À la racine de votre project, créez un fichier "docker-compose.yaml".
+
+Maintenant, nous allons énumérer tout ce que l'on a besoin dans notre application Symfony.
+
+## Mettre en place la base de donnée
+
+Tout d'abord, il nous faut un moteur de base de données. Prenons MySQL. Vous pouvez bien sûr utiliser Postgres ou MariaDB.
+
+Essayons de créer notre fichier.
+
+Vous pouvez copier le code ci-après :
+
+```
+ mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: symfony
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - symfony-network
+      
+```
+
 
 
 
