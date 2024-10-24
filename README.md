@@ -67,10 +67,78 @@ Vous pouvez copier le code ci-après :
       - mysql-data:/var/lib/mysql
     networks:
       - symfony-network
-      
+
 ```
 
+Qu'avons nous fait ?
 
+La première ligne spécifie la version de la syntaxe docker compose. Ensuite nous ajoutons la liste des services nécessaire à notre application. C'est une liste d'images Docker. Vous pouvez voir toutes les images disponibles sur Docker Hub : https://hub.docker.com/.
+Nous avons juste ajouté la dernière version de MySQL. Nous avons aussi mis en place les variables d'environnement nécessaires comme le mot de passe de l'utilisateur ainsi que le nom de la base de données. Toutes les options sont disponibles ici : https://hub.docker.com/_/mysql
+
+Pour ceux qui veulent avoir une interface web, vous pouvez facilement ajouter Adminer. Ajoutez le code suivant :
+
+```
+version: '3.8'
+services:
+    mysql:
+        …
+    
+    adminer:
+        image: adminer
+        restart: on-failure
+        ports:
+            - '8080:8080'
+
+```
+
+La partie "Ports" est utile pour gérer la communication entre vos conteneurs et votre ordinateur. Nous relions le port 8080 de notre conteneur vers celui de votre machine. Ainsi vous pourrez accéder à Adminer en accédant au lien suivant : http://localhost:8080/
+
+## Configurer le serveur HTTP
+
+Maintenant que l'on a un moteur de base de données, il nous faut un serveur HTTP comme Apache ou Nginx. Pour cet exemple, nous utiliserons Nginx.
+
+Dans votre fichier docker-compose, vous pouvez ajouter :
+
+Attention de bien respecter les espacements, yaml est très strict.
+```
+services:
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/var/www/html
+
+    networks:
+      - symfony-network
+
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./:/var/www/html
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "8080:80"
+    networks:
+      - symfony-network
+    depends_on:
+      - php
+
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: symfony
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - symfony-network
+
+```
 
 
 src : https://knplabs.com/fr/blog/comment-dockeriser-un-projet-symfony/
