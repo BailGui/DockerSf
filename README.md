@@ -1,5 +1,7 @@
 # DockerSf
 
+#### Installation de Docker dans une app Symfony déjà existante
+
 ## Première étape : Installer Docker
 
 La première chose à faire est l'installation de Docker sur votre ordinateur.
